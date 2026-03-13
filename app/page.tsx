@@ -8,6 +8,7 @@ import { PhotoUpload } from '@/components/PhotoUpload'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 export default function HomePage() {
   const { createCheckout, isLoading } = useCheckout()
@@ -78,9 +79,12 @@ export default function HomePage() {
             <span className="font-semibold text-base">GeoLocator</span>
             <Badge variant="outline" className="text-xs hidden sm:inline-flex">AI</Badge>
           </Link>
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <Zap className="h-3.5 w-3.5 text-amber-500" />
-            <span>100 sats per analysis</span>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Zap className="h-3.5 w-3.5 text-amber-500" />
+              <span>100 sats per analysis</span>
+            </div>
+            <ThemeToggle />
           </div>
         </div>
       </header>
