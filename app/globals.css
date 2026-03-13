@@ -82,3 +82,18 @@ body {
 * {
   border-color: hsl(var(--border));
 }
+
+@media print {
+  /* Hide everything except the analysis results */
+  header,
+  footer,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+}
