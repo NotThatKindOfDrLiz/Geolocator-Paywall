@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react'
 import { useCheckoutSuccess } from '@moneydevkit/nextjs'
 import { useRouter } from 'next/navigation'
-import { Satellite, Loader2, RefreshCw, ArrowLeft } from 'lucide-react'
+import { ScanSearch, Loader2, RefreshCw, ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
 import { AnalysisResults, type Location } from '@/components/AnalysisResults'
 import { Button } from '@/components/ui/button'
 
@@ -70,8 +71,10 @@ export default function SuccessPage() {
       {/* Header */}
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-3xl mx-auto px-4 h-14 flex items-center gap-2">
-          <Satellite className="h-5 w-5 text-primary" />
-          <span className="font-semibold text-base">GeoLocator</span>
+          <Link href="/" className="flex items-center gap-2">
+            <ScanSearch className="h-5 w-5 text-primary" />
+            <span className="font-semibold text-base">GeoLocator</span>
+          </Link>
         </div>
       </header>
 
