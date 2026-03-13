@@ -104,7 +104,7 @@ export default function SuccessPage() {
             />
             <Button
               variant="outline"
-              className="w-full gap-2"
+              className="w-full gap-2 no-print"
               onClick={() => router.push('/')}
             >
               <ArrowLeft className="h-4 w-4" />
