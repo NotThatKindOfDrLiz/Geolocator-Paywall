@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { MapPin, ImageDown, FileJson, Copy, Check, Printer } from 'lucide-react'
+import { MapPin, ImageDown, FileJson, Copy, Check, Printer, AlertTriangle } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge, type BadgeProps } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
@@ -97,6 +97,13 @@ export function AnalysisResults({ locations, imagePreview }: AnalysisResultsProp
           <div className="rounded-xl overflow-hidden border max-h-64 flex items-center justify-center bg-black/5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={imagePreview} alt="Analyzed photo" className="max-h-64 object-contain" />
+          </div>
+        )}
+
+        {locations.length > 0 && locations.every(loc => loc.confidence === 'Low' || loc.confidence === 'Very Low') && (
+          <div className="rounded-lg bg-amber-500/10 border border-amber-500/20 px-4 py-3 text-sm text-amber-700 dark:text-amber-400 flex items-center gap-2">
+            <AlertTriangle className="h-4 w-4 shrink-0" />
+            All results have low confidence. This image may not contain enough geographic clues for reliable identification.
           </div>
         )}
 
