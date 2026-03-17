@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getGeminiClient, SYSTEM_PROMPT } from '@/lib/gemini'
+import { validateAnalysisResponse } from '@/lib/validate'
 
 export const maxDuration = 60
 
@@ -33,7 +34,15 @@ export async function POST(req: NextRequest) {
     const clean = text.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim()
     const parsed = JSON.parse(clean)
 
-    return NextResponse.json(parsed)
+    const result2 = validateAnalysisResponse(parsed)
+    if (!result2.valid) {
+      return NextResponse.json(
+        { error: `Invalid AI response: ${result2.error}` },
+        { status: 502 },
+      )
+    }
+
+    return NextResponse.json(result2.data)
   } catch (err: unknown) {
     console.error('[analyze]', err)
     const message = err instanceof Error ? err.message : 'Analysis failed'
