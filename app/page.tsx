@@ -113,6 +113,10 @@ export default function HomePage() {
           disabled={isLoading}
         />
 
+        <p className="text-xs text-muted-foreground text-center">
+          Best results with outdoor photos showing buildings, street signs, landscapes, or infrastructure.
+        </p>
+
         {/* Error */}
         {error && (
           <div className="rounded-lg bg-destructive/10 border border-destructive/20 px-4 py-3 text-sm text-destructive">
