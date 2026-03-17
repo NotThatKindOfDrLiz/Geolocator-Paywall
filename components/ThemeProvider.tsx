@@ -17,7 +17,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const stored = localStorage.getItem('theme') as Theme | null
     const initial = stored ?? 'dark'
-    setTheme(initial)
+    setTimeout(() => setTheme(initial))
     document.documentElement.classList.toggle('dark', initial === 'dark')
   }, [])
 

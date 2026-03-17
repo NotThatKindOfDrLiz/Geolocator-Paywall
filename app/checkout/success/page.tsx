@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useCheckoutSuccess } from '@moneydevkit/nextjs'
 import { useRouter } from 'next/navigation'
 import { ScanSearch, Loader2, RefreshCw, ArrowLeft } from 'lucide-react'
@@ -19,31 +19,31 @@ export default function SuccessPage() {
   const { isCheckoutPaidLoading, isCheckoutPaid } = useCheckoutSuccess()
   const router = useRouter()
   const [pageState, setPageState] = useState<PageState>({ status: 'verifying' })
-  const [hasAnalyzed, setHasAnalyzed] = useState(false)
+  const hasAnalyzedRef = useRef(false)
 
   useEffect(() => {
     // Wait until payment verification resolves
     if (isCheckoutPaidLoading || isCheckoutPaid === null) return
 
     if (!isCheckoutPaid) {
-      setPageState({ status: 'unpaid' })
+      setTimeout(() => setPageState({ status: 'unpaid' }))
       return
     }
 
     // Payment confirmed — run analysis once
-    if (hasAnalyzed) return
-    setHasAnalyzed(true)
+    if (hasAnalyzedRef.current) return
+    hasAnalyzedRef.current = true
 
     const imageBase64 = sessionStorage.getItem('pending_image')
     const mimeType = sessionStorage.getItem('pending_mime_type') ?? 'image/jpeg'
     const preview = imageBase64 ? `data:${mimeType};base64,${imageBase64}` : null
 
     if (!imageBase64) {
-      setPageState({ status: 'error', message: 'Image data not found. Please go back and try again.' })
+      setTimeout(() => setPageState({ status: 'error', message: 'Image data not found. Please go back and try again.' }))
       return
     }
 
-    setPageState({ status: 'analyzing' })
+    setTimeout(() => setPageState({ status: 'analyzing' }))
 
     fetch('/api/analyze', {
       method: 'POST',
@@ -64,7 +64,7 @@ export default function SuccessPage() {
       .catch((err: Error) => {
         setPageState({ status: 'error', message: err.message })
       })
-  }, [isCheckoutPaidLoading, isCheckoutPaid, hasAnalyzed])
+  }, [isCheckoutPaidLoading, isCheckoutPaid])
 
   return (
     <div className="min-h-screen bg-background">
@@ -127,7 +127,7 @@ export default function SuccessPage() {
               <Button
                 size="sm"
                 onClick={() => {
-                  setHasAnalyzed(false)
+                  hasAnalyzedRef.current = false
                   setPageState({ status: 'verifying' })
                 }}
               >
