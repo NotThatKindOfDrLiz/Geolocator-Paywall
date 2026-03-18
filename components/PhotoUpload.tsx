@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react'
 import { Upload, ImageIcon, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 
 interface PhotoUploadProps {
@@ -125,13 +126,13 @@ export function PhotoUpload({ onImageReady, onClear, preview, disabled }: PhotoU
         <p className="text-sm text-muted-foreground mt-1">
           Drag & drop or click to browse · JPG, PNG, WEBP
         </p>
-        <p className="text-xs text-muted-foreground mt-2">
-          Best results with outdoor photos showing buildings, street signs, landscapes, or infrastructure.
-        </p>
       </div>
       <Button variant="outline" size="sm" type="button" tabIndex={-1}>
         Choose file
       </Button>
+      <Badge variant="secondary" className="font-normal text-muted-foreground">
+        Best results with outdoor photos showing buildings, street signs, landscapes, or infrastructure.
+      </Badge>
     </div>
   )
 }
