@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { MapPin, ImageDown, FileJson, Copy, Check, Printer } from 'lucide-react'
+import { MapPin, ExternalLink, ImageDown, FileJson, Copy, Check, Printer } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge, type BadgeProps } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
@@ -117,7 +117,17 @@ export function AnalysisResults({ locations, imagePreview }: AnalysisResultsProp
                         <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">
                           {RANK_LABELS[i]}
                         </p>
-                        <CardTitle className="text-lg">{loc.location}</CardTitle>
+                        <CardTitle className="text-lg">
+                          <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.location)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 hover:underline"
+                          >
+                            {loc.location}
+                            <ExternalLink className="h-3.5 w-3.5 text-muted-foreground" />
+                          </a>
+                        </CardTitle>
                       </div>
                       <Badge variant={conf.variant} className="shrink-0 mt-1">
                         {conf.label}
