@@ -186,7 +186,7 @@ export default function SuccessPage() {
 
         {pageState.status === 'unpaid' && (
           <CenteredMessage>
-            <div className="rounded-lg bg-amber-50 border border-amber-200 px-6 py-4 text-sm text-amber-800 text-center max-w-sm">
+            <div className="rounded-lg bg-amber-500/10 border border-amber-500/20 px-6 py-4 text-sm text-amber-700 dark:text-amber-400 text-center max-w-sm">
               <p className="font-medium mb-1">Payment not confirmed</p>
               <p>If you completed the payment, please wait a moment and retry.</p>
             </div>
