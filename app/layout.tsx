@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     title: 'GeoLocator — AI Photo Geolocation',
     description:
       'Upload any photo and AI identifies the top 3 most likely locations it was taken.',
+    images: ['/opengraph-image'],
   },
 }
 
