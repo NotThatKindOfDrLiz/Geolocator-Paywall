@@ -122,10 +122,10 @@ export function AnalysisResults({ locations, imagePreview }: AnalysisResultsProp
                             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.location)}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 hover:underline"
+                            className="hover:underline"
                           >
                             {loc.location}
-                            <ExternalLink className="h-3.5 w-3.5 text-muted-foreground" />
+                            <ExternalLink className="inline h-3.5 w-3.5 ml-1.5 text-muted-foreground" />
                           </a>
                         </CardTitle>
                       </div>
